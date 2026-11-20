@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EletroPromo ML — Gestão de Promoções de Materiais Elétricos</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Overlay para menu mobile -->
+  <div id="sidebar-overlay" class="sidebar-overlay" aria-hidden="true"></div>
+
+  <div class="app-layout">
+    <!-- Menu Lateral -->
+    <aside id="sidebar" class="sidebar" aria-label="Menu principal">
+      <div class="sidebar-header">
+        <div class="brand">
+          <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+          <div>
+            <h1 id="sidebar-system-name" class="brand-title">EletroPromo ML</h1>
+            <span id="sidebar-manager-name" class="brand-subtitle">Painel Administrativo</span>
+          </div>
+        </div>
+        <button id="close-sidebar-btn" class="icon-btn mobile-only" aria-label="Fechar menu">✕</button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-target="dashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          <span>Dashboard</span>
+        </button>
+        <button class="nav-item" data-target="cadastro">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+          <span>Cadastrar Promoção</span>
+        </button>
+        <button class="nav-item" data-target="gerador">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          <span>Gerador & WhatsApp</span>
+        </button>
+        <button class="nav-item" data-target="historico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+          <span>Histórico e Anotações</span>
+        </button>
+        <button class="nav-item" data-target="relatorios">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+          <span>Relatórios de Acesso</span>
+        </button>
+        <button class="nav-item" data-target="fidelidade">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+          <span>Programa de Fidelidade</span>
+        </button>
+        <button class="nav-item" data-target="configuracoes">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          <span>Configurações</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <small>Armazenamento Local (Offline)</small>
+      </div>
+    </aside>
+
+    <!-- Conteúdo Principal -->
+    <div class="main-wrapper">
+      <!-- Barra Superior -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button id="open-sidebar-btn" class="icon-btn mobile-only" aria-label="Abrir menu">☰</button>
+          <h2 id="page-title" class="page-title">Dashboard</h2>
+        </div>
+        <div class="topbar-right">
+          <span id="current-date-badge" class="badge"></span>
+        </div>
+      </header>
+
+      <!-- Área de Notificações (Toast) -->
+      <div id="toast-container" class="toast-container" role="status" aria-live="polite"></div>
+
+      <!-- Telas do Sistema -->
+      <main class="content">
+        <!-- 1. DASHBOARD -->
+        <section id="view-dashboard" class="view active">
+          <div class="kpi-grid">
+            <div class="card kpi-card">
+              <span class="kpi-label">Promoções Cadastradas</span>
+              <strong id="kpi-total-promos" class="kpi-value">0</strong>
+              <span class="kpi-sub">Total no catálogo local</span>
+            </div>
+            <div class="card kpi-card">
+              <span class="kpi-label">Mensagens Compartilhadas</span>
+              <strong id="kpi-total-shares" class="kpi-value">0</strong>
+              <span class="kpi-sub">Disparos registrados</span>
+            </div>
+            <div class="card kpi-card">
+              <span class="kpi-label">Total de Acessos</span>
+              <strong id="kpi-total-sessions" class="kpi-value">0</strong>
+              <span class="kpi-sub">Sessões registradas</span>
+            </div>
+            <div class="card kpi-card">
+              <span class="kpi-label">Acessos (Últimos 7 dias)</span>
+              <strong id="kpi-7days-sessions" class="kpi-value">0</strong>
+              <span id="kpi-distinct-days" class="kpi-sub">0 dias distintos</span>
+            </div>
+            <div class="card kpi-card">
+              <span class="kpi-label">Cupons Disponíveis</span>
+              <strong id="kpi-available-coupons" class="kpi-value">0</strong>
+              <span class="kpi-sub">Prontos para uso</span>
+            </div>
+            <div class="card kpi-card">
+              <span class="kpi-label">Próximo Cupom</span>
+              <strong id="kpi-next-coupon" class="kpi-value kpi-value-sm">-</strong>
+              <span id="kpi-next-coupon-sub" class="kpi-sub">Continue acessando</span>
+            </div>
+          </div>
+
+          <div class="quick-actions card">
+            <h3>Atalhos Rápidos</h3>
+            <div class="btn-group">
+              <button class="btn btn-primary" data-goto="cadastro">+ Nova Promoção</button>
+              <button class="btn btn-secondary" data-goto="gerador">Gerar Mensagem WhatsApp</button>
+              <button class="btn btn-secondary" data-goto="historico">Ver Histórico Completo</button>
+              <button class="btn btn-secondary" data-goto="fidelidade">Meus Cupons</button>
+            </div>
+          </div>
+
+          <div class="dashboard-split">
+            <div class="card">
+              <div class="card-header">
+                <h3>Promoções Recentes</h3>
+                <button class="btn-link" data-goto="historico">Ver todas</button>
+              </div>
+              <div id="dash-recent-promos" class="list-container"></div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3>Últimos Acessos Registrados</h3>
+                <button class="btn-link" data-goto="relatorios">Relatório completo</button>
+              </div>
+              <div id="dash-recent-access" class="list-container"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. CADASTRO DE PROMOÇÕES -->
+        <section id="view-cadastro" class="view">
+          <div class="card">
+            <div class="card-header">
+              <h3 id="form-promo-title">Cadastrar Nova Promoção</h3>
+              <button type="button" id="btn-cancel-edit" class="btn btn-secondary hidden">Cancelar Edição</button>
+            </div>
+
+            <form id="promo-form" novalidate>
+              <input type="hidden" id="promo-id" />
+
+              <div class="form-grid">
+                <div class="form-group span-2">
+                  <label for="promo-name">Nome do Produto *</label>
+                  <input type="text" id="promo-name" placeholder="Ex: Disjuntor Bipolar DIN 32A Curva C" required />
+                </div>
+
+                <div class="form-group">
+                  <label for="promo-category">Categoria do Material Elétrico *</label>
+                  <select id="promo-category" required></select>
+                </div>
+
+                <div class="form-group">
+                  <label for="promo-status">Status da Promoção *</label>
+                  <select id="promo-status" required>
+                    <option value="ativa">Ativa</option>
+                    <option value="agendada">Agendada</option>
+                    <option value="encerrada">Encerrada</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="promo-original-price">Preço Original (R$) *</label>
+                  <input type="text" id="promo-original-price" inputmode="numeric" placeholder="R$ 0,00" required />
+                </div>
+
+                <div class="form-group">
+                  <label for="promo-discount-price">Preço Promocional (R$) *</label>
+                  <input type="text" id="promo-discount-price" inputmode="numeric" placeholder="R$ 0,00" required />
+                </div>
+
+                <div class="form-group">
+                  <label for="promo-discount-percent">Desconto Calculado (%)</label>
+                  <input type="text" id="promo-discount-percent" readonly value="0%" class="input-readonly" />
+                </div>
+
+                <div class="form-group">
+                  <label for="promo-date">Data da Promoção / Validade *</label>
+                  <input type="date" id="promo-date" required />
+                </div>
+
+                <div class="form-group span-2">
+                  <label for="promo-link">Link do Produto no Mercado Livre *</label>
+                  <input type="url" id="promo-link" placeholder="https://produto.mercadolivre.com.br/..." required />
+                </div>
+
+                <div class="form-group">
+                  <label for="promo-payment">Condições de Pagamento</label>
+                  <input type="text" id="promo-payment" placeholder="Ex: Até 10x sem juros no cartão ou 5% OFF no Pix" />
+                </div>
+
+                <div class="form-group">
+                  <label for="promo-shipping">Informação de Frete</label>
+                  <input type="text" id="promo-shipping" placeholder="Ex: Frete Grátis FULL para compras acima de R$ 79" />
+                </div>
+
+                <div class="form-group span-2">
+                  <label for="promo-description">Descrição Técnica / Resumo do Produto</label>
+                  <textarea id="promo-description" rows="2" placeholder="Especificações: tensão, corrente, bitola, certificação INMETRO..."></textarea>
+                </div>
+
+                <div class="form-group span-2">
+                  <label for="promo-notes">Observações Adicionais (Anotações Internas)</label>
+                  <textarea id="promo-notes" rows="2" placeholder="Anotações sobre estoque, fornecedor ou público-alvo..."></textarea>
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button type="reset" id="btn-reset-promo" class="btn btn-secondary">Limpar Campos</button>
+                <button type="submit" id="btn-save-promo" class="btn btn-primary">Salvar Promoção</button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <!-- 3. GERADOR DE MENSAGENS E WHATSAPP -->
+        <section id="view-gerador" class="view">
+          <div class="generator-grid">
+            <div class="card">
+              <h3>1. Configurar Mensagem Promocional</h3>
+
+              <div class="form-group">
+                <label for="gen-promo-select">Selecionar Produto Cadastrado</label>
+                <select id="gen-promo-select">
+                  <option value="">-- Selecione uma promoção --</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="gen-template-select">Modelo de Mensagem Comercial</label>
+                <select id="gen-template-select">
+                  <option value="padrao">Modelo 1: Oferta Especial (Padrão)</option>
+                  <option value="urgencia">Modelo 2: Oportunidade Relâmpago / Estoque</option>
+                  <option value="tecnico">Modelo 3: Informativo Técnico para Eletricistas</option>
+                  <option value="curto">Modelo 4: Direto e Objetivo (Grupos)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Inserir Emojis Rápidos</label>
+                <div class="emoji-bar" id="emoji-bar">
+                  <button type="button" class="emoji-btn" data-emoji="⚡">⚡</button>
+                  <button type="button" class="emoji-btn" data-emoji="🔥">🔥</button>
+                  <button type="button" class="emoji-btn" data-emoji="🔌">🔌</button>
+                  <button type="button" class="emoji-btn" data-emoji="💡">💡</button>
+                  <button type="button" class="emoji-btn" data-emoji="🛠️">🛠️</button>
+                  <button type="button" class="emoji-btn" data-emoji="💰">💰</button>
+                  <button type="button" class="emoji-btn" data-emoji="✅">✅</button>
+                  <button type="button" class="emoji-btn" data-emoji="📉">📉</button>
+                  <button type="button" class="emoji-btn" data-emoji="🛒">🛒</button>
+                  <button type="button" class="emoji-btn" data-emoji="🚚">🚚</button>
+                  <button type="button" class="emoji-btn" data-emoji="⚠️">⚠️</button>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="gen-message-text">Texto da Mensagem (Editável)</label>
+                <textarea id="gen-message-text" rows="11" placeholder="Selecione uma promoção acima para gerar a mensagem automaticamente ou digite seu texto aqui..."></textarea>
+              </div>
+
+              <div class="btn-group">
+                <button type="button" id="btn-regenerate-msg" class="btn btn-secondary">Regerar Texto</button>
+                <button type="button" id="btn-copy-msg" class="btn btn-secondary">Copiar Mensagem</button>
+              </div>
+            </div>
+
+            <div class="card preview-panel">
+              <h3>2. Pré-visualização e Compartilhamento</h3>
+              <p class="helper-text">Confira exatamente como o texto será enviado antes de abrir o WhatsApp.</p>
+
+              <div class="whatsapp-preview-box">
+                <div class="whatsapp-bubble">
+                  <pre id="msg-preview-content" class="preview-pre">Nenhuma mensagem gerada ainda.</pre>
+                  <span class="preview-time" id="preview-clock">20:00</span>
+                </div>
+              </div>
+
+              <div class="share-box">
+                <button type="button" id="btn-share-whatsapp" class="btn btn-whatsapp">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                  COMPARTILHAR NO WHATSAPP
+                </button>
+                <small class="disclaimer-text">
+                  O sistema abrirá o aplicativo WhatsApp (via compartilhamento nativo no celular ou WhatsApp Web no computador) para você escolher o contato ou grupo e confirmar o envio.
+                </small>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. HISTÓRICO E ANOTAÇÕES -->
+        <section id="view-historico" class="view">
+          <div class="card">
+            <div class="card-header">
+              <h3>Histórico e Anotações de Promoções</h3>
+              <button class="btn btn-primary" data-goto="cadastro">+ Nova Promoção</button>
+            </div>
+
+            <!-- Filtros -->
+            <div class="filters-grid">
+              <div class="form-group">
+                <label for="filter-search">Pesquisar Produto</label>
+                <input type="search" id="filter-search" placeholder="Buscar por nome ou anotação..." />
+              </div>
+              <div class="form-group">
+                <label for="filter-category">Categoria</label>
+                <select id="filter-category">
+                  <option value="">Todas as categorias</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="filter-status">Status</label>
+                <select id="filter-status">
+                  <option value="">Todos os status</option>
+                  <option value="ativa">Ativa</option>
+                  <option value="agendada">Agendada</option>
+                  <option value="encerrada">Encerrada</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="filter-date-start">Data Inicial</label>
+                <input type="date" id="filter-date-start" />
+              </div>
+              <div class="form-group">
+                <label for="filter-date-end">Data Final</label>
+                <input type="date" id="filter-date-end" />
+              </div>
+              <div class="form-group filter-action">
+                <button type="button" id="btn-clear-filters" class="btn btn-secondary">Limpar Filtros</button>
+              </div>
+            </div>
+
+            <!-- Tabela Responsiva -->
+            <div class="table-responsive">
+              <table class="data-table" id="promos-table">
+                <thead>
+                  <tr>
+                    <th>Data Cadastro</th>
+                    <th>Produto / Categoria</th>
+                    <th>Preços</th>
+                    <th>Validade</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                  </tr>
+                </thead>
+                <tbody id="promos-table-body"></tbody>
+              </table>
+            </div>
+            <div id="promos-empty-state" class="empty-state hidden">
+              <p>Nenhuma promoção encontrada para os filtros selecionados.</p>
+              <button class="btn btn-primary" data-goto="cadastro">Cadastrar Primeira Promoção</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. RELATÓRIOS DE FREQUÊNCIA DE ACESSO -->
+        <section id="view-relatorios" class="view">
+          <div class="kpi-grid">
+            <div class="card kpi-card">
+              <span class="kpi-label">Total de Sessões</span>
+              <strong id="rep-total-sessions" class="kpi-value">0</strong>
+            </div>
+            <div class="card kpi-card">
+              <span class="kpi-label">Acessos Hoje</span>
+              <strong id="rep-today-sessions" class="kpi-value">0</strong>
+            </div>
+            <div class="card kpi-card">
+              <span class="kpi-label">Acessos na Semana (7d)</span>
+              <strong id="rep-week-sessions" class="kpi-value">0</strong>
+            </div>
+            <div class="card kpi-card">
+              <span class="kpi-label">Acessos no Mês (30d)</span>
+              <strong id="rep-month-sessions" class="kpi-value">0</strong>
+            </div>
+            <div class="card kpi-card">
+              <span class="kpi-label">Dias Distintos (Total)</span>
+              <strong id="rep-distinct-days" class="kpi-value">0</strong>
+            </div>
+            <div class="card kpi-card">
+              <span class="kpi-label">Último Acesso</span>
+              <strong id="rep-last-access" class="kpi-value kpi-value-sm">-</strong>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Frequência de Acessos — Últimos 14 Dias</h3>
+            <p class="helper-text">Visualização diária de sessões iniciadas neste navegador.</p>
+            <div id="access-chart-container" class="chart-wrapper"></div>
+          </div>
+
+          <div class="card">
+            <h3>Histórico Detalhado de Sessões</h3>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Data</th>
+                    <th>Horário</th>
+                    <th>Dia da Semana</th>
+                    <th>Dispositivo / Tela</th>
+                  </tr>
+                </thead>
+                <tbody id="access-history-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 6. PROGRAMA DE FIDELIDADE (CUPONS) -->
+        <section id="view-fidelidade" class="view">
+          <div id="coupon-banner" class="coupon-highlight-banner hidden"></div>
+
+          <div class="card">
+            <h3>Regras de Recorrência Ativas</h3>
+            <p class="helper-text">Acesse o sistema em dias diferentes para desbloquear automaticamente cupons locais de desconto.</p>
+            <div id="loyalty-rules-grid" class="rules-grid"></div>
+          </div>
+
+          <div class="card">
+            <h3>Cupons Disponíveis</h3>
+            <div id="available-coupons-list" class="coupons-grid"></div>
+          </div>
+
+          <div class="card">
+            <h3>Histórico de Cupons (Utilizados / Expirados)</h3>
+            <div id="past-coupons-list" class="coupons-grid"></div>
+          </div>
+        </section>
+
+        <!-- 7. CONFIGURAÇÕES -->
+        <section id="view-configuracoes" class="view">
+          <div class="settings-grid">
+            <div class="card">
+              <h3>Identificação e Preferências</h3>
+              <form id="settings-form">
+                <div class="form-group">
+                  <label for="cfg-system-name">Nome do Sistema</label>
+                  <input type="text" id="cfg-system-name" required />
+                </div>
+                <div class="form-group">
+                  <label for="cfg-manager-name">Nome do Responsável pelas Promoções</label>
+                  <input type="text" id="cfg-manager-name" placeholder="Ex: Carlos Silva — Vendas Elétrica" />
+                </div>
+                <div class="form-group">
+                  <label for="cfg-share-mode">Preferência de Compartilhamento</label>
+                  <select id="cfg-share-mode">
+                    <option value="auto">Automático (Web Share no celular / WhatsApp Web no PC)</option>
+                    <option value="wa_link">Sempre usar link direto WhatsApp (api.whatsapp.com)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="cfg-default-template">Modelo de Mensagem Padrão</label>
+                  <select id="cfg-default-template">
+                    <option value="padrao">Modelo 1: Oferta Especial</option>
+                    <option value="urgencia">Modelo 2: Oportunidade Relâmpago</option>
+                    <option value="tecnico">Modelo 3: Informativo Técnico</option>
+                    <option value="curto">Modelo 4: Direto e Objetivo</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Salvar Preferências</button>
+              </form>
+            </div>
+
+            <div class="card">
+              <h3>Gerenciar Categorias</h3>
+              <form id="category-form" class="inline-form">
+                <input type="text" id="new-category-name" placeholder="Nova categoria..." required />
+                <button type="submit" class="btn btn-primary">Adicionar</button>
+              </form>
+              <ul id="categories-manage-list" class="tag-list"></ul>
+            </div>
+
+            <div class="card">
+              <h3>Regras de Recorrência (Fidelidade)</h3>
+              <form id="rules-form">
+                <div class="rule-edit-row">
+                  <span>Nível 1 (5%):</span>
+                  <input type="number" id="rule-1-days" min="1" max="30" required /> dias distintos em
+                  <input type="number" id="rule-1-period" min="1" max="90" required /> dias
+                </div>
+                <div class="rule-edit-row">
+                  <span>Nível 2 (10%):</span>
+                  <input type="number" id="rule-2-days" min="1" max="60" required /> dias distintos em
+                  <input type="number" id="rule-2-period" min="1" max="120" required /> dias
+                </div>
+                <div class="rule-edit-row">
+                  <span>Nível 3 (15%):</span>
+                  <input type="number" id="rule-3-days" min="1" max="90" required /> dias distintos em
+                  <input type="number" id="rule-3-period" min="1" max="180" required /> dias
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">Atualizar Regras</button>
+              </form>
+            </div>
+
+            <div class="card">
+              <h3>Backup e Manutenção de Dados</h3>
+              <p class="helper-text">
+                Os dados ficam armazenados exclusivamente no LocalStorage deste navegador. Faça backups periódicos em JSON para evitar perdas.
+              </p>
+              <div class="backup-actions">
+                <button type="button" id="btn-export-json" class="btn btn-secondary">Exportar Backup (JSON)</button>
+                <label for="input-import-json" class="btn btn-secondary file-label">
+                  Importar Backup (JSON)
+                  <input type="file" id="input-import-json" accept=".json,application/json" hidden />
+                </label>
+                <button type="button" id="btn-clear-all-data" class="btn btn-danger">Limpar Todos os Dados</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- Modal de Detalhes da Promoção -->
+  <div id="detail-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modal-title">Detalhes da Promoção</h3>
+        <button type="button" id="close-modal-btn" class="icon-btn" aria-label="Fechar modal">✕</button>
+      </div>
+      <div id="modal-body" class="modal-body"></div>
+      <div class="modal-footer">
+        <button type="button" id="modal-use-generator-btn" class="btn btn-primary">Abrir no Gerador WhatsApp</button>
+        <button type="button" id="modal-close-footer-btn" class="btn btn-secondary">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
